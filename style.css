@@ -1,0 +1,127 @@
+:root {
+    --bgColorMenu: #1d1d27;
+    --duration: 0.7s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: #ffb457;
+    transition: background-color var(--duration);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.menu {
+    display: flex;
+    width: 100%;
+    font-size: 24px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bgColorMenu);
+}
+
+.menu__item {
+    width: 20%;
+    all: unset;
+    flex-grow: 1;
+    z-index: 100;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+    transition: transform var(--duration);
+}
+
+.menu__item::before {
+    content: "";
+    z-index: -1;
+    width: 4.2em;
+    height: 4.2em;
+    border-radius: 50%;
+    position: absolute;
+    transform: scale(0);
+    transition: background-color var(--duration), transform var(--duration);
+}
+
+.menu__item.menu__item_active {
+    transform: translate3d(0, -.8em, 0);
+}
+
+.menu__item.menu__item_active::before {
+    transform: scale(1);
+    background-color: var(--bgColorItem);
+}
+
+.icon {
+    width: 2.6em;
+    height: 2.6em;
+    stroke: white;
+    fill: transparent;
+    stroke-width: 1pt;
+    stroke-miterlimit: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 400;
+}
+
+.menu__item.menu__item_active .icon {
+    animation: strok 1.5s reverse;
+}
+
+.menu__circle {
+    position: absolute;
+    left: 0;
+    bottom: 99%;
+    width: 20%;
+    height: 60px;
+    clip-path: url('#circle');
+    background-color: var(--bgColorMenu);
+    transition: transform var(--duration);
+}
+
+@keyframes strok {
+    100% {
+        stroke-dashoffset: 400;
+    }
+}
+
+@media (max-width: 992px) {
+    .menu {
+        font-size: 16px;
+    }
+
+    .menu__circle {
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu {
+        font-size: 14px;
+    }
+
+    .menu__circle {
+        height: 30px;
+    }
+}
+
+@media (max-width: 575px) {
+    .menu {
+        font-size: 10px;
+    }
+
+    .menu__circle {
+        height: 15px;
+    }
+}
